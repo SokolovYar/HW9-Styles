@@ -1,0 +1,116 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Background="DimGray"
+        Title="Autentification" Height="175" Width="350" MinWidth="350" MinHeight="175">
+
+    <Window.Resources>
+        <ControlTemplate TargetType="Button" x:Key="ButtonTemplate_Green">
+            <Border x:Name="border" CornerRadius="15" BorderThickness="2" Background="Green">
+                <ContentPresenter Content="{TemplateBinding Content}" Margin="5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter TargetName="border" Property="BorderThickness" Value="2" />
+                    <Setter TargetName="border" Property="Background" Value="LightGreen"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="border" Property="Background" Value="DarkGreen"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate TargetType="Button" x:Key="ButtonTemplate_Red">
+            <Border x:Name="border" CornerRadius="15" BorderThickness="0" Background="Red">
+                <ContentPresenter Content="{TemplateBinding Content}" Margin="5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter TargetName="border" Property="Background" Value="LightCoral"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="border" Property="Background" Value="DarkRed"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate> 
+
+        <Style x:Key="RoundedTextBox" TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Setter Property="Background" Value="WhiteSmoke"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="LightGray"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="Gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="RoundedPasswordBox" TargetType="PasswordBox">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Setter Property="Background" Value="WhiteSmoke"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="LightGray"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="Gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="39.716"/>
+            <RowDefinition Height="39.715"/>
+            <RowDefinition Height="14.893"/>
+            <RowDefinition Height="39.716"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Label Content="Username:" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Margin="20,5,5,5" VerticalAlignment="Center"  />
+        <TextBox x:Name="Login" Style="{StaticResource RoundedTextBox}" Grid.Column="1" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="Sokol_ua39" VerticalAlignment="Center" Width="200" ToolTip="Enter your valid login" Height="18"/>
+
+        <Label Content="Password:" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Margin="20,5,5,5" VerticalAlignment="Center"  Grid.Row="1" />
+        <PasswordBox x:Name="Password" Style="{StaticResource RoundedPasswordBox}" Grid.Column="1" HorizontalAlignment="Left" Margin="5,0,0,0"  VerticalAlignment="Center" Width="200" Grid.Row="1" PasswordChar="*" Height="18"/>
+
+        <CheckBox Grid.Column="1" Content="Remember Me" HorizontalAlignment="Left" Margin="5,0,100,0" Grid.Row="2" VerticalAlignment="Center" IsChecked="True"/>
+
+        <Button Grid.Column="1"  Template="{StaticResource ButtonTemplate_Green}" Content="Log In" HorizontalAlignment="Left" Margin="5,5,100,5" Grid.Row="3" VerticalAlignment="Center" Height="30" Width="90" Click="Button_Click_1"/>
+        <Button Grid.Column="1" Template="{StaticResource ButtonTemplate_Red}" Content="Cancel" HorizontalAlignment="Left" Margin="119,0,0,0" Grid.Row="3" VerticalAlignment="Center" Height="30" Width="90" Click="Button_Click"/>
+
+    </Grid>
+</Window>
